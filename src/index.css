@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import 'gridstack/dist/gridstack.min.css';
 
 body {
     font-family: 'Manrope';
