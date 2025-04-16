@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { 
   LineChart, 
   Line, 
@@ -12,6 +12,8 @@ import {
 import { ChevronDown } from 'lucide-react';
 
 const RevenueOverviewChart = () => {
+  const chartContainerRef = useRef(null);
+  
   const data = [
     {
       sector: 'Technology',
@@ -39,8 +41,31 @@ const RevenueOverviewChart = () => {
     }
   ];
 
+  // Force chart to resize when container size changes
+  useEffect(() => {
+    const handleResize = () => {
+      if (chartContainerRef.current) {
+        // Trigger redraw by forcing a state update
+        const event = new Event('resize');
+        window.dispatchEvent(event);
+      }
+    };
+
+    const resizeObserver = new ResizeObserver(handleResize);
+    
+    if (chartContainerRef.current) {
+      resizeObserver.observe(chartContainerRef.current);
+    }
+
+    return () => {
+      if (chartContainerRef.current) {
+        resizeObserver.unobserve(chartContainerRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="bg-white rounded-lg p-6 shadow-md mr-4 mb-4 w-[400px] h-[400px]">
+    <div className="bg-white rounded-b-lg p-6 shadow-md w-full h-full" ref={chartContainerRef}>
       {/* Custom SVG Filters for Glow Effect */}
       <svg width="0" height="0" className="absolute">
         <defs>
@@ -76,65 +101,67 @@ const RevenueOverviewChart = () => {
         </button>
       </div>
       
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
-          <CartesianGrid 
-            strokeDasharray="3 3" 
-            vertical={false} 
-            stroke="#f0f0f0"
-          />
-          <XAxis 
-            dataKey="sector" 
-            axisLine={false}
-            tickLine={false}
-          />
-          <YAxis 
-            axisLine={false}
-            tickLine={false}
-          />
-          <Tooltip 
-            contentStyle={{ 
-              backgroundColor: 'white', 
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px'
-            }}
-          />
-          <Legend 
-            verticalAlign="top" 
-            align="right"
-            iconType="circle"
-            iconSize={10}
-          />
-          
-          <Line 
-            type="monotone" 
-            dataKey="2022" 
-            stroke="#8884d8" 
-            strokeWidth={2}
-            dot={{ r: 4 }}
-            className="line-glow-purple"
-            style={{ filter: 'url(#glow-purple)' }}
-          />
-          <Line 
-            type="monotone" 
-            dataKey="2023" 
-            stroke="#00C17C" 
-            strokeWidth={2}
-            dot={{ r: 4 }}
-            className="line-glow-green"
-            style={{ filter: 'url(#glow-green)' }}
-          />
-          <Line 
-            type="monotone" 
-            dataKey="2024" 
-            stroke="#000000" 
-            strokeWidth={2}
-            dot={{ r: 4 }}
-            className="line-glow-black"
-            style={{ filter: 'url(#glow-black)' }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+      <div className="w-full h-64">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={data}>
+            <CartesianGrid 
+              strokeDasharray="3 3" 
+              vertical={false} 
+              stroke="#f0f0f0"
+            />
+            <XAxis 
+              dataKey="sector" 
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 10 }}
+            />
+            <YAxis 
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 10 }}
+            />
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: 'white', 
+                border: '1px solid #e0e0e0',
+                borderRadius: '8px'
+              }}
+            />
+            <Legend 
+              verticalAlign="top" 
+              align="right"
+              iconType="circle"
+              iconSize={8}
+              wrapperStyle={{ fontSize: '10px' }}
+            />
+            
+            <Line 
+              type="monotone" 
+              dataKey="2022" 
+              stroke="#8884d8" 
+              strokeWidth={2}
+              dot={{ r: 3 }}
+              style={{ filter: 'url(#glow-purple)' }}
+            />
+            <Line 
+              type="monotone" 
+              dataKey="2023" 
+              stroke="#00C17C" 
+              strokeWidth={2}
+              dot={{ r: 3 }}
+              style={{ filter: 'url(#glow-green)' }}
+            />
+            <Line 
+              type="monotone" 
+              dataKey="2024" 
+              stroke="#000000" 
+              strokeWidth={2}
+              dot={{ r: 3 }}
+              style={{ filter: 'url(#glow-black)' }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
