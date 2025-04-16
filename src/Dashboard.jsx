@@ -7,37 +7,31 @@ import WelcomeCard from "./WelcomeCard";
 
 const Dashboard = ({ isSidebarCollapsed }) => {
   useEffect(() => {
-    // Load gridstack
+    // Clear localStorage if the page is manually refreshed
+    if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+      localStorage.removeItem('dashboard-layout');
+    }
+  
     let grid;
-    
-    // Wait for DOM to be fully loaded
+  
     setTimeout(() => {
       try {
         grid = GridStack.init({
           column: 12,
           minRow: 1,
           cellHeight: 80,
-          // Ensure items maintain width constraints during resize
           minWidth: 350,
           maxWidth: 700,
-          // Enable dragging by handle only
-          draggable: {
-            handle: '.grid-drag-handle',
-          },
-          // Define what parts of the item are resizable
-          resizable: {
-            handles: 'e, se, s, sw, w',
-          },
+          draggable: { handle: '.grid-drag-handle' },
+          resizable: { handles: 'e, se, s, sw, w' },
           float: true,
-          animate: true
+          animate: true,
         });
-        
-        // Listen for changes and save layout
+  
         grid.on('change', () => {
           localStorage.setItem('dashboard-layout', JSON.stringify(grid.save()));
         });
-        
-        // Try to load saved layout
+  
         const savedLayout = localStorage.getItem('dashboard-layout');
         if (savedLayout) {
           try {
@@ -51,18 +45,18 @@ const Dashboard = ({ isSidebarCollapsed }) => {
         console.error("GridStack initialization error:", error);
       }
     }, 100);
-    
-    // Cleanup
+  
     return () => {
       if (grid) {
         try {
-          grid.destroy(false); // false means don't remove DOM elements
+          grid.destroy(false);
         } catch (error) {
           console.error("Error cleaning up GridStack:", error);
         }
       }
     };
   }, []);
+  
 
   return (
     <div className="relative h-screen flex flex-col">
