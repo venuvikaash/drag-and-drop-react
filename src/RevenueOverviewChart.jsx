@@ -65,7 +65,7 @@ const RevenueOverviewChart = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded-b-lg p-6 shadow-md w-full h-full" ref={chartContainerRef}>
+    <div className="bg-white rounded-b-lg p-6 h-full flex flex-col" ref={chartContainerRef}>
       {/* Custom SVG Filters for Glow Effect */}
       <svg width="0" height="0" className="absolute">
         <defs>
@@ -101,7 +101,7 @@ const RevenueOverviewChart = () => {
         </button>
       </div>
       
-      <div className="w-full h-64">
+      <div className="flex-1 min-h-0">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
             <CartesianGrid 
