@@ -88,7 +88,7 @@ const RevenueOverviewRadarChart = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded-b-lg p-6 shadow-md w-full h-full" ref={chartContainerRef}>
+    <div className="bg-white rounded-b-lg p-6 h-full flex flex-col" ref={chartContainerRef}>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold text-gray-800">Revenue Overview</h2>
         <div className="flex items-center space-x-2">
@@ -99,7 +99,7 @@ const RevenueOverviewRadarChart = () => {
         </div>
       </div>
       
-      <div className="w-full h-64">
+      <div className="flex-1 min-h-0">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart 
             data={data}
