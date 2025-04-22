@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { 
   LineChart, 
   Line, 
@@ -13,6 +13,7 @@ import { ChevronDown } from 'lucide-react';
 
 const RevenueOverviewChart = () => {
   const chartContainerRef = useRef(null);
+  const [containerHeight, setContainerHeight] = useState(0);
   
   const data = [
     {
@@ -45,11 +46,17 @@ const RevenueOverviewChart = () => {
   useEffect(() => {
     const handleResize = () => {
       if (chartContainerRef.current) {
+        // Update container height for responsive sizing
+        setContainerHeight(chartContainerRef.current.clientHeight);
+        
         // Trigger redraw by forcing a state update
         const event = new Event('resize');
         window.dispatchEvent(event);
       }
     };
+
+    // Initial size calculation
+    handleResize();
 
     const resizeObserver = new ResizeObserver(handleResize);
     
@@ -65,7 +72,7 @@ const RevenueOverviewChart = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded-b-lg p-6 h-full flex flex-col" ref={chartContainerRef}>
+    <div className="bg-white rounded-lg shadow-sm p-6 h-[500px] flex flex-col" ref={chartContainerRef}>
       {/* Custom SVG Filters for Glow Effect */}
       <svg width="0" height="0" className="absolute">
         <defs>
@@ -93,17 +100,20 @@ const RevenueOverviewChart = () => {
         </defs>
       </svg>
 
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold text-gray-800">Revenue Overview</h2>
-        <button className="flex items-center text-gray-600 border rounded-md px-3 py-1">
+        <button className="flex items-center text-gray-600 border rounded-md px-3 py-1 hover:bg-gray-50 transition-colors">
           Last 3 Years 
           <ChevronDown className="ml-2 w-4 h-4" />
         </button>
       </div>
       
-      <div className="flex-1 min-h-0">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data}>
+      <div className="flex-1 w-full">
+        <ResponsiveContainer width="100%" height="100%" maxHeight={500}>
+          <LineChart 
+            data={data}
+            margin={{ top: 10, right: 30, left: 0, bottom: 10 }}
+          >
             <CartesianGrid 
               strokeDasharray="3 3" 
               vertical={false} 
@@ -113,51 +123,62 @@ const RevenueOverviewChart = () => {
               dataKey="sector" 
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 10 }}
+              tick={{ fontSize: 12, fill: '#666' }}
+              dy={10}
             />
             <YAxis 
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 10 }}
+              tick={{ fontSize: 12, fill: '#666' }}
+              dx={-10}
             />
             <Tooltip 
               contentStyle={{ 
                 backgroundColor: 'white', 
                 border: '1px solid #e0e0e0',
-                borderRadius: '8px'
+                borderRadius: '8px',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                padding: '10px'
               }}
+              labelStyle={{ fontWeight: 'bold', marginBottom: '5px' }}
             />
             <Legend 
               verticalAlign="top" 
               align="right"
               iconType="circle"
-              iconSize={8}
-              wrapperStyle={{ fontSize: '10px' }}
+              iconSize={10}
+              wrapperStyle={{ fontSize: '12px', paddingBottom: '10px' }}
             />
             
             <Line 
               type="monotone" 
               dataKey="2022" 
               stroke="#8884d8" 
-              strokeWidth={2}
-              dot={{ r: 3 }}
+              strokeWidth={2.5}
+              dot={{ r: 4, strokeWidth: 2 }}
+              activeDot={{ r: 6, strokeWidth: 0 }}
               style={{ filter: 'url(#glow-purple)' }}
+              name="2022"
             />
             <Line 
               type="monotone" 
               dataKey="2023" 
               stroke="#00C17C" 
-              strokeWidth={2}
-              dot={{ r: 3 }}
+              strokeWidth={2.5}
+              dot={{ r: 4, strokeWidth: 2 }}
+              activeDot={{ r: 6, strokeWidth: 0 }}
               style={{ filter: 'url(#glow-green)' }}
+              name="2023"
             />
             <Line 
               type="monotone" 
               dataKey="2024" 
               stroke="#000000" 
-              strokeWidth={2}
-              dot={{ r: 3 }}
+              strokeWidth={2.5}
+              dot={{ r: 4, strokeWidth: 2 }}
+              activeDot={{ r: 6, strokeWidth: 0 }}
               style={{ filter: 'url(#glow-black)' }}
+              name="2024"
             />
           </LineChart>
         </ResponsiveContainer>

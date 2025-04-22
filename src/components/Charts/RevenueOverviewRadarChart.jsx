@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { 
   Radar, 
   RadarChart, 
@@ -6,12 +6,14 @@ import {
   PolarAngleAxis, 
   PolarRadiusAxis, 
   ResponsiveContainer,
-  Tooltip
+  Tooltip,
+  Legend
 } from 'recharts';
 import { ChevronDown } from 'lucide-react';
 
 const RevenueOverviewRadarChart = () => {
   const chartContainerRef = useRef(null);
+  const [containerHeight, setContainerHeight] = useState(0);
   
   const data = [
     {
@@ -68,11 +70,17 @@ const RevenueOverviewRadarChart = () => {
   useEffect(() => {
     const handleResize = () => {
       if (chartContainerRef.current) {
+        // Update container height for responsive sizing
+        setContainerHeight(chartContainerRef.current.clientHeight);
+        
         // Trigger redraw by forcing a state update
         const event = new Event('resize');
         window.dispatchEvent(event);
       }
     };
+
+    // Initial size calculation
+    handleResize();
 
     const resizeObserver = new ResizeObserver(handleResize);
     
@@ -88,24 +96,23 @@ const RevenueOverviewRadarChart = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded-b-lg p-6 h-full flex flex-col" ref={chartContainerRef}>
-      <div className="flex justify-between items-center mb-4">
+    <div className="bg-white rounded-lg shadow-sm p-6 h-[500px] flex flex-col" ref={chartContainerRef}>
+      <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold text-gray-800">Revenue Overview</h2>
-        <div className="flex items-center space-x-2">
-          <button className="flex items-center text-gray-600 border rounded-md px-3 py-1">
-            Last 3 Years 
-            <ChevronDown className="ml-2 w-4 h-4" />
-          </button>
-        </div>
+        <button className="flex items-center text-gray-600 border rounded-md px-3 py-1 hover:bg-gray-50 transition-colors">
+          Last 3 Years 
+          <ChevronDown className="ml-2 w-4 h-4" />
+        </button>
       </div>
       
-      <div className="flex-1 min-h-0">
-        <ResponsiveContainer width="100%" height="100%">
+      <div className="flex-1 w-full">
+        <ResponsiveContainer width="100%" height="100%" maxHeight={500}>
           <RadarChart 
             data={data}
             startAngle={90}
             innerRadius="10%"
             outerRadius="80%"
+            margin={{ top: 10, right: 30, left: 30, bottom: 10 }}
           >
             <PolarGrid 
               stroke={colorPalette.blackOpacity50}
@@ -114,7 +121,7 @@ const RevenueOverviewRadarChart = () => {
             <PolarAngleAxis 
               dataKey="subject" 
               stroke={colorPalette.black}
-              tick={{ fontSize: 9 }}
+              tick={{ fontSize: 12, fill: '#333' }}
               tickLine={false}
             />
             <PolarRadiusAxis 
@@ -122,22 +129,33 @@ const RevenueOverviewRadarChart = () => {
               domain={[0, 100]} 
               tickCount={4}
               stroke={colorPalette.blackOpacity80}
-              tick={{ fontSize: 9 }}
+              tick={{ fontSize: 12, fill: '#666' }}
               strokeOpacity={0.7}
             />
             <Tooltip 
               contentStyle={{ 
                 backgroundColor: 'white', 
                 border: '1px solid #e0e0e0',
-                borderRadius: '8px'
+                borderRadius: '8px',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                padding: '10px'
               }}
+              labelStyle={{ fontWeight: 'bold', marginBottom: '5px' }}
+            />
+            <Legend 
+              verticalAlign="top" 
+              align="right"
+              iconType="circle"
+              iconSize={10}
+              wrapperStyle={{ fontSize: '12px', paddingBottom: '10px' }}
             />
             <Radar 
               name="2022" 
               dataKey="2022" 
               stroke={colorPalette.purple2022} 
               fill={colorPalette.purple2022} 
-              fillOpacity={0.3}
+              fillOpacity={0.4}
+              strokeWidth={2}
               animationBegin={0}
               animationDuration={1500}
             />
@@ -146,8 +164,9 @@ const RevenueOverviewRadarChart = () => {
               dataKey="2023" 
               stroke={colorPalette.green2023} 
               fill={colorPalette.green2023}
-              fillOpacity={0.3}
-              animationBegin={0}
+              fillOpacity={0.4}
+              strokeWidth={2}
+              animationBegin={200}
               animationDuration={1500}
             />
             <Radar 
@@ -155,8 +174,9 @@ const RevenueOverviewRadarChart = () => {
               dataKey="2024" 
               stroke={colorPalette.darkGreen2024} 
               fill={colorPalette.darkGreen2024}
-              fillOpacity={0.3}
-              animationBegin={0}
+              fillOpacity={0.4}
+              strokeWidth={2}
+              animationBegin={400}
               animationDuration={1500}
             />
           </RadarChart>

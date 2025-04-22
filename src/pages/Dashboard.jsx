@@ -1,6 +1,9 @@
 import React, { useEffect , lazy } from "react";
 import { GridStack } from "gridstack";
 import "gridstack/dist/gridstack.min.css";
+
+
+
 const RevenueOverviewRadarChart = lazy(() =>
   import("../components/Charts/RevenueOverviewRadarChart")
 );
@@ -24,20 +27,20 @@ const InternalElements = [
     gs_x: "6",
     gs_y: "0",
   },
-  {
-    element: <RevenueOverviewChart/>,
-    gs_w: "6",
-    gs_h: "5",
-    gs_x: "0",
-    gs_y: "5",
-  },
-  {
-    element: <RevenueOverviewRadarChart/>,
-    gs_w: "6",
-    gs_h: "5",
-    gs_x: "6",
-    gs_y: "5",
-  },
+  // {
+  //   element: <RevenueOverviewChart/>,
+  //   gs_w: "6",
+  //   gs_h: "5",
+  //   gs_x: "0",
+  //   gs_y: "5",
+  // },
+  // {
+  //   element: <RevenueOverviewRadarChart/>,
+  //   gs_w: "6",
+  //   gs_h: "5",
+  //   gs_x: "6",
+  //   gs_y: "5",
+  // },
 ];
 
 const Dashboard = ({ isSidebarCollapsed }) => {
@@ -53,39 +56,38 @@ const Dashboard = ({ isSidebarCollapsed }) => {
         handle : '.grid-drag-handle'
       },
       resizable: {
-        handles: 'e, se, s, sw, w',
+        // handles: 'e, se, s, sw, w',
       },
       float: true,
       animate: true,
-      lazyLoad: false
+      lazyLoad: false,
+      disableOneColumnMode: true
     });
   }, [])  
 
   return (
-    <div className="relative h-screen flex flex-col">
-      <div className="pl-4 pr-4 h-[175px]">
+    <div className="h-full w-full flex flex-col">
+      <div className="pl-4 pr-4 h-[175px] flex-shrink-0">
         <WelcomeCard isSidebarCollapsed={isSidebarCollapsed} />
       </div>
-      <div className="h-screen overflow-scroll p-4">
-        <div className="grid-stack">
+      <div className="flex-grow p-4 w-full">
+        <div className="grid-stack h-full">
           {
-            InternalElements.map((element, index) => {
-              console.log(index);
-              
+            InternalElements.map((element, index) => {              
               return (
                 <div 
                   key={index}
                   className="grid-stack-item" 
-                  gs-w={element.gs_w}
-                  gs-h={element.gs_h} 
-                  gs-x={element.gs_x} 
-                  gs-y={element.gs_y}
+                  gs-w={parseInt(element.gs_w, 10)}
+                  gs-h={parseInt(element.gs_h, 10)} 
+                  gs-x={parseInt(element.gs_x, 10)} 
+                  gs-y={parseInt(element.gs_y, 10)}
                 >
-                  <div className="grid-stack-item-content p-0 flex flex-col">
-                    <div className="grid-drag-handle px-4 py-2 cursor-move bg-gray-100 rounded-t-lg flex justify-between items-center">
+                  <div className="grid-stack-item-content">
+                    <div className="grid-drag-handle cursor-move">
                       <div className="resize-indicator">⋮⋮</div>
                     </div>
-                    <div className="flex-1">
+                    <div className="grid-content">
                       {element.element}
                     </div>
                   </div>

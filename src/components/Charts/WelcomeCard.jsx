@@ -50,7 +50,7 @@ const WelcomeCard = ({ isSidebarCollapsed }) => {
         flexDirection: "column",
         gap: "10px",
         padding: "20px",
-        width: !isSidebarCollapsed ? "100%" : "1400.8px",
+        width: "100%",
         height: "175px",
         borderRadius: "30px",
         background: "#1B4E4D",
