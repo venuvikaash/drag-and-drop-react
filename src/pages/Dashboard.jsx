@@ -66,7 +66,7 @@ const Dashboard = ({ isSidebarCollapsed }) => {
       <div className="pl-4 pr-4 h-[175px]">
         <WelcomeCard isSidebarCollapsed={isSidebarCollapsed} />
       </div>
-      <div className="h-[900px] overflow-scroll p-4">
+      <div className="h-screen overflow-scroll p-4">
         <div className="grid-stack">
           {
             InternalElements.map((element, index) => {
