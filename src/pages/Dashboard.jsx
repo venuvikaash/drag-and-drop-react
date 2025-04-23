@@ -56,7 +56,7 @@ const Dashboard = ({ isSidebarCollapsed }) => {
         handle : '.grid-drag-handle'
       },
       resizable: {
-        // handles: 'e, se, s, sw, w',
+        handles: 'e, se, s, sw, w',
       },
       float: true,
       animate: true,
@@ -66,7 +66,7 @@ const Dashboard = ({ isSidebarCollapsed }) => {
   }, [])  
 
   return (
-    <div className="h-full w-full flex flex-col" style={{overflow: 'scroll'}}>
+    <div className="h-full w-full flex flex-col">
       <div className="pl-4 pr-4 h-[175px] flex-shrink-0">
         <WelcomeCard isSidebarCollapsed={isSidebarCollapsed} />
       </div>

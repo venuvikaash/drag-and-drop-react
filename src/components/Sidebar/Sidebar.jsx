@@ -69,7 +69,7 @@ const Sidebar = ({ toggleSidebar, isCollapsed }) => {
     <aside
       className={`
         ${isCollapsed ? "w-20" : "w-64"} 
-        h-[650px] mt-[25px] ml-[10px] rounded-2xl bg-white 
+        h-[90%] mt-[25px] ml-[10px] rounded-2xl bg-white 
         shadow-md flex flex-col fixed top-0 left-0 z-50 
         transition-all duration-300 ease-in-out overflow-hidden
       `}

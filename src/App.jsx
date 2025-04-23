@@ -27,7 +27,7 @@ function App() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
+          height: "100%",
           width: "100vw",
           backgroundColor: "#F4F6F9",
         }}
@@ -42,8 +42,8 @@ function App() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        height: "100vh",
-        backgroundColor: "#F4F6F9",
+        height: "100%",
+        backgroundColor: "#D3D3D3", 
       }}
     >
       <Box

@@ -5,8 +5,8 @@ import ProfileAndSearch from './ProfileAndSearch';
 const Header = ({isCollapsed}) => {
     return (
         <div className={`flex justify-between items-center w-full px-6 py-3 transition-all duration-300 ease-in-out ${isCollapsed ? "ml-[80px]" : "ml-[256px]"}`}>
-            <div className="text-base font-semibold text-gray-800" style={{ width: "15%"}}>Dashboard</div>
-            <div className="flex-1 flex justify-center">
+            <div className="text-base font-semibold text-gray-800 mx-3">Dashboard</div>
+            <div className="flex-1 flex justify-center mx-2 w-full">
                 <SegmentedControl />
             </div>
             <div>
