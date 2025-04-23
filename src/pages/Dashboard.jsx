@@ -27,20 +27,20 @@ const InternalElements = [
     gs_x: "6",
     gs_y: "0",
   },
-  // {
-  //   element: <RevenueOverviewChart/>,
-  //   gs_w: "6",
-  //   gs_h: "5",
-  //   gs_x: "0",
-  //   gs_y: "5",
-  // },
-  // {
-  //   element: <RevenueOverviewRadarChart/>,
-  //   gs_w: "6",
-  //   gs_h: "5",
-  //   gs_x: "6",
-  //   gs_y: "5",
-  // },
+  {
+    element: <RevenueOverviewChart/>,
+    gs_w: "6",
+    gs_h: "5",
+    gs_x: "0",
+    gs_y: "5",
+  },
+  {
+    element: <RevenueOverviewRadarChart/>,
+    gs_w: "6",
+    gs_h: "5",
+    gs_x: "6",
+    gs_y: "5",
+  },
 ];
 
 const Dashboard = ({ isSidebarCollapsed }) => {
@@ -66,7 +66,7 @@ const Dashboard = ({ isSidebarCollapsed }) => {
   }, [])  
 
   return (
-    <div className="h-full w-full flex flex-col">
+    <div className="h-full w-full flex flex-col" style={{overflow: 'scroll'}}>
       <div className="pl-4 pr-4 h-[175px] flex-shrink-0">
         <WelcomeCard isSidebarCollapsed={isSidebarCollapsed} />
       </div>

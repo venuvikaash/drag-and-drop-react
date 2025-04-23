@@ -43,7 +43,6 @@ function App() {
         display: "flex",
         flexDirection: "column",
         height: "100vh",
-        overflow: "hidden",
         backgroundColor: "#F4F6F9",
       }}
     >
@@ -62,7 +61,6 @@ function App() {
         sx={{
           display: "flex",
           flexGrow: 1,
-          overflow: "hidden",
         }}
       >
         <Sidebar
