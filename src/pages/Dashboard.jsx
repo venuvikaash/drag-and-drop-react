@@ -1,6 +1,9 @@
-import React, { useEffect , lazy } from "react";
+import React, { useEffect, lazy } from "react";
 import { GridStack } from "gridstack";
 import "gridstack/dist/gridstack.min.css";
+import PostBox from "../components/Charts/PostBox";
+import Post from "../components/Charts/Post";
+import BirthdayTabs from "../components/Charts/BirthdayTabs";
 
 
 
@@ -14,28 +17,28 @@ let grid;
 
 const InternalElements = [
   {
-    element: <RevenueOverviewChart/>,
+    element: <RevenueOverviewChart />,
     gs_w: "6",
     gs_h: "5",
     gs_x: "0",
     gs_y: "0",
   },
   {
-    element: <RevenueOverviewRadarChart/>,
+    element: <RevenueOverviewRadarChart />,
     gs_w: "6",
     gs_h: "5",
     gs_x: "6",
     gs_y: "0",
   },
   {
-    element: <RevenueOverviewChart/>,
+    element: <RevenueOverviewChart />,
     gs_w: "6",
     gs_h: "5",
     gs_x: "0",
     gs_y: "5",
   },
   {
-    element: <RevenueOverviewRadarChart/>,
+    element: <RevenueOverviewRadarChart />,
     gs_w: "6",
     gs_h: "5",
     gs_x: "6",
@@ -52,8 +55,8 @@ const Dashboard = ({ isSidebarCollapsed }) => {
       cellHeight: 80,
       minWidth: 350,
       maxWidth: 700,
-      draggable:{
-        handle : '.grid-drag-handle'
+      draggable: {
+        handle: '.grid-drag-handle'
       },
       resizable: {
         handles: 'e, se, s, sw, w',
@@ -63,7 +66,7 @@ const Dashboard = ({ isSidebarCollapsed }) => {
       lazyLoad: false,
       disableOneColumnMode: true
     });
-  }, [])  
+  }, [])
 
   return (
     <div className="h-full w-full flex flex-col">
@@ -73,14 +76,14 @@ const Dashboard = ({ isSidebarCollapsed }) => {
       <div className="flex-grow p-4 w-full">
         <div className="grid-stack h-full">
           {
-            InternalElements.map((element, index) => {              
+            InternalElements.map((element, index) => {
               return (
-                <div 
+                <div
                   key={index}
-                  className="grid-stack-item" 
+                  className="grid-stack-item"
                   gs-w={parseInt(element.gs_w, 10)}
-                  gs-h={parseInt(element.gs_h, 10)} 
-                  gs-x={parseInt(element.gs_x, 10)} 
+                  gs-h={parseInt(element.gs_h, 10)}
+                  gs-x={parseInt(element.gs_x, 10)}
                   gs-y={parseInt(element.gs_y, 10)}
                 >
                   <div className="grid-stack-item-content">
@@ -95,7 +98,17 @@ const Dashboard = ({ isSidebarCollapsed }) => {
               );
             })
           }
-        </div> 
+        </div>
+      </div>
+
+      <div className="flex flex-row gap-4 pl-7 pr-4">
+        <div className="flex flex-col gap-6">
+          <PostBox />
+          <BirthdayTabs />
+        </div>
+        <div>
+          <Post />
+        </div>
       </div>
     </div>
   );
