@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 import { ChevronDown } from 'lucide-react';
 
-const RevenueOverviewChart = () => {
+const CustomLineChart = () => {
   const chartContainerRef = useRef(null);
   const [containerHeight, setContainerHeight] = useState(0);
   
@@ -187,4 +187,4 @@ const RevenueOverviewChart = () => {
   );
 };
 
-export default RevenueOverviewChart;
+export default CustomLineChart;
