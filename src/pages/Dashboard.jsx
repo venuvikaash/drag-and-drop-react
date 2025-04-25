@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, lazy } from "react";
+import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { GridStack } from "gridstack";
 import "gridstack/dist/gridstack.min.css";
 
@@ -21,9 +21,13 @@ const SingleBarChart = lazy(() => import("../components/Charts/SingleBarChart"))
 const PieChart = lazy(() => import("../components/Charts/PieChart"));
 const WaveChart = lazy(() => import("../components/Charts/WaveChart"));
 const GroupedBarChart = lazy(() => import("../components/Charts/GroupedBarChart"));
+const HorizontalBarChart = lazy(() => import("../components/Charts/HorizontalBarChart"));
+const CustomGaugeChart = lazy(() => import("../components/Charts/CustomGaugeChart"));
+const EmployeeCalendar = lazy(() => import("../components/Tabs/EmployeeCalendar"));
 
-const InternalElements = [
+const defaultElements = [
   {
+    id: "custom-line-chart",
     element: <CustomLineChart/>,
     width: 4,
     height: 5,
@@ -32,6 +36,7 @@ const InternalElements = [
     noResize: false
   },
   {
+    id: "pie-chart",
     element: <PieChart/>,
     width: 4,
     height: 5,
@@ -40,6 +45,7 @@ const InternalElements = [
     noResize: false
   },
   {
+    id: "custom-radar-chart",
     element: <CustomRadarChart/>,
     width: 4,
     height: 5,
@@ -48,6 +54,7 @@ const InternalElements = [
     noResize: false
   },
   {
+    id: "wave-chart",
     element: <WaveChart/>,
     width: 4,
     height: 4,
@@ -56,6 +63,7 @@ const InternalElements = [
     noResize: false
   },
   {
+    id: "single-bar-chart",
     element: <SingleBarChart/>,
     width: 4,
     height: 4,
@@ -64,6 +72,7 @@ const InternalElements = [
     noResize: false
   },
   {
+    id: "grouped-bar-chart",
     element: <GroupedBarChart/>,
     width: 4,
     height: 4,
@@ -72,14 +81,16 @@ const InternalElements = [
     noResize: false
   },
   {
+    id: "linear-chart",
     element: <LinearChart/>,
     width: 6,
     height: 5,
     x: 0,
     y: 9,
     noResize: true
-  },  
+  },
   {
+    id: "performance-chart",
     element: <PerformanceChart/>,
     width: 6,
     height: 5,
@@ -88,6 +99,7 @@ const InternalElements = [
     noResize: true
   },
   {
+    id: "leave-summary",
     element: <LeaveSummary/>,
     width: 6,
     height: 7,
@@ -96,6 +108,7 @@ const InternalElements = [
     noResize: true
   },
   {
+    id: "recent-updates",
     element: <RecentUpdates/>,
     width: 6,
     height: 7,
@@ -104,14 +117,16 @@ const InternalElements = [
     noResize: true
   },
   {
+    id: "recent-update-list",
     element: <RecentUpdateList/>,
     width: 4,
     height: 5,
     x: 0,
     y: 21,
     noResize: true
-  },  
+  },
   {
+    id: "team-status",
     element: <TeamStatus/>,
     width: 4,
     height: 5,
@@ -120,6 +135,7 @@ const InternalElements = [
     noResize: true
   },
   {
+    id: "schedule",
     element: <Schedule/>,
     width: 4,
     height: 8,
@@ -128,131 +144,271 @@ const InternalElements = [
     noResize: true
   },
   {
+    id: "holidays",
     element: <Holidays/>,
     width: 4,
     height: 4,
     x: 0,
     y: 26,
     noResize: true
-  },    
+  },
   {
+    id: "notes",
     element: <Notes/>,
     width: 4,
     height: 4,
     x: 4,
     y: 26,
     noResize: true
-  },  
+  },
   {
-    element: <Post/>,
-    width: 6,
-    height: 10,
-    x: 6,
-    y: 30,
-    noResize: true
-  },  
-  {
+    id: "post-box",
     element: <PostBox/>,
     width: 6,
     height: 4,
     x: 0,
     y: 30,
     noResize: true
-  },  
+  },
   {
+    id: "post",
+    element: <Post/>,
+    width: 6,
+    height: 10,
+    x: 6,
+    y: 30,
+    noResize: true
+  },
+  {
+    id: "birthday-tabs",
     element: <BirthdayTabs/>,
     width: 6,
     height: 5,
     x: 0,
     y: 34,
     noResize: true
-  },  
+  },
+  {
+    id: "horizontal-bar-chart",
+    element: <HorizontalBarChart/>,
+    width: 6,
+    height: 5,
+    x: 0,
+    y: 39,
+    noResize: true
+  },
+  {
+    id: "employee-calendar",
+    element: <EmployeeCalendar/>,
+    width: 6,
+    height: 5,
+    x: 6,
+    y: 39,
+    noResize: true
+  },
+  {
+    id: "custom-gauge-chart",
+    element: <CustomGaugeChart/>,
+    width: 6,
+    height: 5,
+    x: 0,
+    y: 44,
+    noResize: true
+  },
 ];
 
 const Dashboard = ({ isSidebarCollapsed }) => {
   const gridRef = useRef(null);
+  const [elements, setElements] = useState([]);
+  const gridInitialized = useRef(false);
 
   useEffect(() => {
-    if (gridRef.current) {
-      gridRef.current.destroy(false);
-    }
-    
-    gridRef.current = GridStack.init({
-      column: 12,
-      minRow: 1,
-      cellHeight: 80,
-      minWidth: 350,
-      maxWidth: 700,
-      draggable: {
-        handle: '.grid-drag-handle'
-      },
-      resizable: {
-        handles: 'e, se, s, sw, w',
-      },
-      float: true,
-      animate: true,
-      disableOneColumnMode: true
-    });
-
-    gridRef.current.on('resizestart', function(event, el) {
-      const index = parseInt(el.getAttribute('data-index'), 10);
-      if (InternalElements[index]?.noResize) {
-        return false;
-      }
-    });
-
-    setTimeout(() => {
-      const gridItems = document.querySelectorAll('.grid-stack-item');
-      gridItems.forEach((item, index) => {
-        if (InternalElements[index]?.noResize) {
-          const resizeHandles = item.querySelectorAll('.ui-resizable-handle');
-          resizeHandles.forEach(handle => handle.remove());
-          item.classList.remove('ui-resizable');
-          if (gridRef.current.engine.nodes[index]) {
-            gridRef.current.engine.nodes[index].noResize = true;
+    try {
+      const savedLayout = localStorage.getItem('dashboardLayout');
+      if (savedLayout) {
+        const parsedLayout = JSON.parse(savedLayout);
+        
+        const layoutMap = {};
+        parsedLayout.forEach(item => {
+          if (item.id) {
+            
+            layoutMap[item.id] = {
+              id: item.id,
+              x: item.x,
+              y: item.y,
+              width: item.w || item.width, 
+              height: item.h || item.height, 
+              noResize: item.noResize
+            };
           }
-        }
-      });
-    }, 100);
+        });
 
-    return () => {
+        const updatedElements = defaultElements.map(element => {
+          const savedElement = layoutMap[element.id];
+          if (savedElement) {
+            return {
+              ...element,
+              x: savedElement.x,
+              y: savedElement.y,
+              width: savedElement.width,
+              height: savedElement.height,
+              noResize: element.noResize 
+            };
+          }
+          return element;
+        });
+
+        setElements(updatedElements);
+      } else {
+        setElements(defaultElements);
+      }
+    } catch (error) {
+      console.error("Error loading saved layout:", error);
+      setElements(defaultElements);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!elements.length) return;
+
+    const initializeGrid = () => {
       if (gridRef.current) {
         gridRef.current.destroy(false);
       }
+
+      const grid = GridStack.init({
+        column: 12,
+        minRow: 1,
+        cellHeight: 80,
+        minWidth: 350,
+        maxWidth: 700,
+        draggable: {
+          handle: '.grid-drag-handle'
+        },
+        resizable: {
+          handles: 'e, se, s, sw, w',
+        },
+        float: true,
+        animate: true,
+        disableOneColumnMode: true,
+        staticGrid: false
+      });
+
+      gridRef.current = grid;
+
+      const saveLayout = () => {
+        
+        const serializedLayout = grid.save(false, false);
+        localStorage.setItem('dashboardLayout', JSON.stringify(serializedLayout));
+      };
+
+      grid.on('change', saveLayout);
+      grid.on('dragstop', saveLayout);
+      grid.on('resizestop', saveLayout);
+
+      setTimeout(() => {
+        
+        const gridItems = document.querySelectorAll('.grid-stack-item');
+        gridItems.forEach((item) => {
+          const itemId = item.getAttribute('gs-id');
+          const element = elements.find(el => el.id === itemId);
+
+          if (element?.noResize) {
+            const resizeHandles = item.querySelectorAll('.ui-resizable-handle');
+            resizeHandles.forEach(handle => handle.remove());
+            item.classList.remove('ui-resizable');
+
+            const nodeIndex = grid.engine.nodes.findIndex(
+              node => node.el && node.el.getAttribute('gs-id') === itemId
+            );
+
+            if (nodeIndex >= 0) {
+              grid.engine.nodes[nodeIndex].noResize = true;
+            }
+          }
+        });
+
+        grid.batchUpdate();
+        elements.forEach(element => {
+          const node = {
+            id: element.id,
+            x: element.x,
+            y: element.y,
+            w: element.width,
+            h: element.height,
+            noResize: element.noResize
+          };
+          grid.update(`[gs-id="${element.id}"]`, node);
+        });
+        grid.commit();
+
+        saveLayout();
+      }, 200);
+
+      gridInitialized.current = true;
     };
-  }, []);
+
+    if (elements.length > 0) {
+      
+      setTimeout(initializeGrid, 50);
+    }
+
+    return () => {
+      if (gridRef.current) {
+        gridRef.current.off('change');
+        gridRef.current.off('dragstop');
+        gridRef.current.off('resizestop');
+        gridRef.current.destroy(false);
+        gridInitialized.current = false;
+      }
+    };
+  }, [elements]);
+
+  const resetLayout = () => {
+    localStorage.removeItem('dashboardLayout');
+    setElements(defaultElements);
+  };
 
   return (
     <div className="h-full w-full flex flex-col">
       <div className="pl-4 pr-4 h-[175px] flex-shrink-0">
-        <WelcomeCard isSidebarCollapsed={isSidebarCollapsed} />
+        <Suspense fallback={<div>Loading welcome card...</div>}>
+          <WelcomeCard isSidebarCollapsed={isSidebarCollapsed} />
+        </Suspense>
+        <button
+          onClick={resetLayout}
+          className="absolute top-4 right-4 px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded"
+        >
+          Reset Layout
+        </button>
       </div>
       <div className="flex-grow p-4 w-full">
         <div className="grid-stack h-full">
-          {
-            InternalElements.map((element, index) => {              
-              return (
-                <div 
-                  key={index}
-                  data-index={index}
-                  className="grid-stack-item" 
-                  gs-w={element.width}
-                  gs-h={element.height}
-                  gs-x={element.x}
-                  gs-y={element.y}
-                  gs-no-resize={element.noResize ? 'true' : undefined}
-                  gs-id={`grid-item-${index}`}
-                >
-                  <div className="grid-stack-item-content grid-drag-handle cursor-move no-scrollbar">
-                    <div className="grid-content no-scrollbar">
-                      {element.element}
-                    </div>
-                  </div>
+          {elements.map((element) => (
+            <div
+              key={element.id}
+              className="grid-stack-item"
+              gs-id={element.id}
+              gs-w={element.width}
+              gs-h={element.height}
+              gs-x={element.x}
+              gs-y={element.y}
+              gs-no-resize={element.noResize ? 'true' : undefined}
+              data-gs-width={element.width}
+              data-gs-height={element.height}
+              data-gs-x={element.x}
+              data-gs-y={element.y}
+            >
+              <div className="grid-stack-item-content grid-drag-handle cursor-move no-scrollbar">
+                <div className="grid-content no-scrollbar">
+                  <Suspense fallback={<div>Loading component...</div>}>
+                    {element.element}
+                  </Suspense>
                 </div>
-              );
-            })
-          }
-        </div> 
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
