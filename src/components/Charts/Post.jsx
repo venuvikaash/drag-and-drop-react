@@ -1,9 +1,9 @@
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
-const Post = () => {
 
+const Post = () => {
     return (
-        <div className="w-[500px] p-4 border-[1px] border-[#DFDFDF] bg-white rounded-xl">
+        <div className="w-full h-full p-4 border-[1px] border-[#DFDFDF] bg-white rounded-xl overflow-auto">
             <div className="flex flex-row gap-4">
                 <div className="flex items-center">
                     <img
@@ -20,7 +20,7 @@ const Post = () => {
             </div>
             <img
                 src="https://images.unsplash.com/photo-1657039918024-73ca6892cc67?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="w-full h-[300px] resize-none rounded-lg p-3 text-sm outline-none"
+                className="w-full h-[200px] object-cover resize-none rounded-lg p-3 text-sm outline-none"
             ></img>
 
             <div className="flex justify-between items-center p-4 pt-0">
@@ -54,7 +54,6 @@ const Post = () => {
             </div>
         </div>
     );
-
 }
 
-export default Post
+export default Post;

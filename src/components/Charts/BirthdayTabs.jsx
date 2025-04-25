@@ -31,7 +31,7 @@ const BirthdayTabs = () => {
     const [tabIndex, setTabIndex] = useState(0);
 
     return (
-        <Box className="w-[500px] p-4 border-[1px] border-[#DFDFDF] bg-white rounded-xl">
+        <Box className="w-full h-full p-4 border-[1px] border-[#DFDFDF] bg-white rounded-xl overflow-auto">
             <Tabs
                 value={tabIndex}
                 onChange={(e, val) => setTabIndex(val)}
@@ -92,4 +92,4 @@ const BirthdayTabs = () => {
     );
 }
 
-export default BirthdayTabs
+export default BirthdayTabs;

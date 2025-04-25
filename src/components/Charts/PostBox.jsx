@@ -4,11 +4,10 @@ import BrokenImageOutlinedIcon from '@mui/icons-material/BrokenImageOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 
 const PostBox = () => {
-
     const [isPoll, setIsPoll] = useState(false);
 
     return (
-        <div className="w-[500px] p-4 border-[1px] border-[#DFDFDF] bg-white rounded-xl">
+        <div className="w-full h-full p-4 border-[1px] border-[#DFDFDF] bg-white rounded-xl overflow-auto">
             <div className="flex items-center justify-between pb-[3%]">
                 <div className="flex items-center gap-2 ">
                     <img
@@ -31,7 +30,7 @@ const PostBox = () => {
             </div>
             <textarea
                 placeholder="Write your post or question here"
-                className="w-full h-[200px] resize-none rounded-lg border border-[#DFDFDF] bg-[#EEEEEE] p-3 text-sm outline-none"
+                className="w-full h-[140px] resize-none rounded-lg border border-[#DFDFDF] bg-[#EEEEEE] p-3 text-sm outline-none"
             ></textarea>
 
             <div className="flex justify-between items-center mt-4">
@@ -58,7 +57,6 @@ const PostBox = () => {
             </div>
         </div>
     );
-
 }
 
-export default PostBox
+export default PostBox;
