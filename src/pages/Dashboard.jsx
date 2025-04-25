@@ -2,61 +2,97 @@ import React, { useEffect, useRef, lazy } from "react";
 import { GridStack } from "gridstack";
 import "gridstack/dist/gridstack.min.css";
 
-const RevenueOverviewRadarChart = lazy(() =>
-  import("../components/Charts/RevenueOverviewRadarChart")
-);
-const RevenueOverviewChart = lazy(() => import("../components/Charts/RevenueOverviewChart"));
-const WelcomeCard = lazy(() => import("../components/Charts/WelcomeCard"));
-const RecentUpdates = lazy(() => import("../components/Charts/RecentUpdates"));
-const RecentUpdateList = lazy(() => import("../components/Charts/RecentUpdateList"));
-const LeaveSummary = lazy(() => import("../components/Charts/LeaveSummary"));
-const TeamStatus = lazy(() => import("../components/Charts/TeamsStatus"));
-const Schedule = lazy(() => import("../components/Charts/Schedule"));
-const Notes = lazy(() => import("../components/Charts/Notes"));
-const Holidays = lazy(() => import("../components/Charts/Holiday"));
-const BirthdayTabs = lazy(() => import("../components/Charts/BirthdayTabs"));
-const Post = lazy(() => import("../components/Charts/Post"));
-const PostBox = lazy(() => import("../components/Charts/PostBox"));
+const CustomRadarChart = lazy(() => import("../components/Charts/CustomRadarChart"));
+const CustomLineChart = lazy(() => import("../components/Charts/CustomLineChart"));
+const WelcomeCard = lazy(() => import("../components/WelcomeCard/WelcomeCard"));
+const RecentUpdates = lazy(() => import("../components/Tabs/RecentUpdates"));
+const RecentUpdateList = lazy(() => import("../components/Tabs/RecentUpdateList"));
+const LeaveSummary = lazy(() => import("../components/Tabs/LeaveSummary"));
+const TeamStatus = lazy(() => import("../components/Tabs/TeamsStatus"));
+const Schedule = lazy(() => import("../components/Tabs/Schedule"));
+const Notes = lazy(() => import("../components/Tabs/Notes"));
+const Holidays = lazy(() => import("../components/Tabs/Holiday"));
+const BirthdayTabs = lazy(() => import("../components/Tabs/BirthdayTabs"));
+const Post = lazy(() => import("../components/Tabs/Post"));
+const PostBox = lazy(() => import("../components/Tabs/PostBox"));
+const LinearChart = lazy(() => import("../components/Charts/LinearChart"));
+const PerformanceChart = lazy(() => import("../components/Charts/PerformanceChart"));
+const SingleBarChart = lazy(() => import("../components/Charts/SingleBarChart"));
+const PieChart = lazy(() => import("../components/Charts/PieChart"));
+const WaveChart = lazy(() => import("../components/Charts/WaveChart"));
+const GroupedBarChart = lazy(() => import("../components/Charts/GroupedBarChart"));
 
 const InternalElements = [
   {
-    element: <RevenueOverviewChart/>,
-    width: 6,
-    height: 5,
-    x: 0,
-    y: 0,
-    noResize: false
-  },
-  {
-    element: <RevenueOverviewRadarChart/>,
+    element: <CustomLineChart/>,
     width: 4,
     height: 5,
-    x: 6,
+    x: 0,
     y: 0,
     noResize: false
   },
   {
-    element: <RevenueOverviewChart/>,
-    width: 6,
+    element: <PieChart/>,
+    width: 4,
     height: 5,
+    x: 4,
+    y: 0,
+    noResize: false
+  },
+  {
+    element: <CustomRadarChart/>,
+    width: 4,
+    height: 5,
+    x: 8,
+    y: 0,
+    noResize: false
+  },
+  {
+    element: <WaveChart/>,
+    width: 4,
+    height: 4,
     x: 0,
     y: 5,
     noResize: false
   },
   {
-    element: <RevenueOverviewRadarChart/>,
+    element: <SingleBarChart/>,
+    width: 4,
+    height: 4,
+    x: 4,
+    y: 5,
+    noResize: false
+  },
+  {
+    element: <GroupedBarChart/>,
+    width: 4,
+    height: 4,
+    x: 8,
+    y: 5,
+    noResize: false
+  },
+  {
+    element: <LinearChart/>,
+    width: 6,
+    height: 5,
+    x: 0,
+    y: 9,
+    noResize: true
+  },  
+  {
+    element: <PerformanceChart/>,
     width: 6,
     height: 5,
     x: 6,
-    y: 5,
-    noResize: false
+    y: 9,
+    noResize: true
   },
   {
     element: <LeaveSummary/>,
     width: 6,
     height: 7,
     x: 0,
-    y: 10,
+    y: 14,
     noResize: true
   },
   {
@@ -64,7 +100,7 @@ const InternalElements = [
     width: 6,
     height: 7,
     x: 6,
-    y: 10,
+    y: 14,
     noResize: true
   },
   {
@@ -72,7 +108,7 @@ const InternalElements = [
     width: 4,
     height: 5,
     x: 0,
-    y: 17,
+    y: 21,
     noResize: true
   },  
   {
@@ -80,31 +116,31 @@ const InternalElements = [
     width: 4,
     height: 5,
     x: 4,
-    y: 17,
+    y: 21,
     noResize: true
   },
   {
     element: <Schedule/>,
     width: 4,
-    height: 10,
-    x: 8,
-    y: 17,
+    height: 8,
+    x: 9,
+    y: 21,
     noResize: true
-  },  
+  },
   {
     element: <Holidays/>,
     width: 4,
-    height: 8,
+    height: 4,
     x: 0,
-    y: 22,
+    y: 26,
     noResize: true
-  },  
+  },    
   {
     element: <Notes/>,
     width: 4,
-    height: 8,
+    height: 4,
     x: 4,
-    y: 22,
+    y: 26,
     noResize: true
   },  
   {
@@ -118,7 +154,7 @@ const InternalElements = [
   {
     element: <PostBox/>,
     width: 6,
-    height: 5,
+    height: 4,
     x: 0,
     y: 30,
     noResize: true
@@ -128,7 +164,7 @@ const InternalElements = [
     width: 6,
     height: 5,
     x: 0,
-    y: 35,
+    y: 34,
     noResize: true
   },  
 ];
@@ -207,8 +243,8 @@ const Dashboard = ({ isSidebarCollapsed }) => {
                   gs-no-resize={element.noResize ? 'true' : undefined}
                   gs-id={`grid-item-${index}`}
                 >
-                  <div className="grid-stack-item-content grid-drag-handle cursor-move">
-                    <div className="grid-content">
+                  <div className="grid-stack-item-content grid-drag-handle cursor-move no-scrollbar">
+                    <div className="grid-content no-scrollbar">
                       {element.element}
                     </div>
                   </div>

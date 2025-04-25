@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 import { ChevronDown } from 'lucide-react';
 
-const RevenueOverviewRadarChart = () => {
+const CustomRadarChart = () => {
   const chartContainerRef = useRef(null);
   const [containerHeight, setContainerHeight] = useState(0);
   
@@ -186,4 +186,4 @@ const RevenueOverviewRadarChart = () => {
   );
 };
 
-export default RevenueOverviewRadarChart;
+export default CustomRadarChart;
