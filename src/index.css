@@ -13,3 +13,8 @@
 body {
   font-family: "Manrope";
 }
+
+.grid-content > div{
+	height: 100vh !important;
+  border-radius: 10px !important;
+}

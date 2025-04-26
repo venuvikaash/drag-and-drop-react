@@ -26,206 +26,208 @@ const CustomGaugeChart = lazy(() => import("../components/Charts/CustomGaugeChar
 const EmployeeCalendar = lazy(() => import("../components/Tabs/EmployeeCalendar"));
 const SmoothCurveChart = lazy(() => import("../components/Charts/SmoothCurveChart"));
 
+
 const defaultElements = [
   {
     id: "custom-line-chart",
-    element: <CustomLineChart/>,
+    element: <CustomLineChart />,
     width: 4,
-    height: 5,
+    height: 7,
     x: 0,
     y: 0,
     noResize: false
   },
   {
     id: "pie-chart",
-    element: <PieChart/>,
+    element: <PieChart />,
     width: 4,
-    height: 5,
+    height: 7,
     x: 4,
     y: 0,
     noResize: false
   },
   {
     id: "custom-radar-chart",
-    element: <CustomRadarChart/>,
+    element: <CustomRadarChart />,
     width: 4,
-    height: 5,
+    height: 7,
     x: 8,
     y: 0,
     noResize: false
   },
   {
     id: "wave-chart",
-    element: <WaveChart/>,
+    element: <WaveChart />,
     width: 4,
-    height: 4,
+    height: 5,
     x: 0,
-    y: 5,
+    y: 7,
     noResize: false
   },
   {
     id: "single-bar-chart",
-    element: <SingleBarChart/>,
+    element: <SingleBarChart />,
     width: 4,
-    height: 4,
+    height: 5,
     x: 4,
-    y: 5,
+    y: 7,
     noResize: false
   },
   {
     id: "grouped-bar-chart",
-    element: <GroupedBarChart/>,
+    element: <GroupedBarChart />,
     width: 4,
-    height: 4,
+    height: 5,
     x: 8,
-    y: 5,
+    y: 7,
     noResize: false
   },
   {
     id: "linear-chart",
-    element: <LinearChart/>,
+    element: <LinearChart />,
     width: 6,
     height: 5,
     x: 0,
-    y: 9,
+    y: 12,
     noResize: false
   },
   {
     id: "performance-chart",
-    element: <PerformanceChart/>,
+    element: <PerformanceChart />,
     width: 6,
     height: 5,
     x: 6,
-    y: 9,
-    noResize: false
-  },
-  {
-    id: "team-status",
-    element: <TeamStatus/>,
-    width: 4,
-    height: 5,
-    x: 4,
-    y: 14,
-    noResize: false
-  },
-  {
-    id: "schedule",
-    element: <Schedule/>,
-    width: 4,
-    height: 10,
-    x: 9,
-    y: 14,
-    noResize: false
-  },
-  {
-    id: "leave-summary",
-    element: <LeaveSummary/>,
-    width: 4,
-    height: 5,
-    x: 9,
-    y: 24,
+    y: 12,
     noResize: false
   },
   {
     id: "recent-update-list",
-    element: <RecentUpdateList/>,
+    element: <RecentUpdateList />,
     width: 4,
     height: 5,
     x: 0,
-    y: 14,
+    y: 17,
     noResize: false
   },
   {
-    id: "recent-updates",
-    element: <RecentUpdates/>,
-    width: 8,
+    id: "team-status",
+    element: <TeamStatus />,
+    width: 4,
     height: 5,
-    x: 0,
-    y: 21,
+    x: 4,
+    y: 17,
+    noResize: false
+  },
+  {
+    id: "schedule",
+    element: <Schedule />,
+    width: 4,
+    height: 10,
+    x: 8,
+    y: 17,
     noResize: false
   },
   {
     id: "holidays",
-    element: <Holidays/>,
+    element: <Holidays />,
     width: 4,
     height: 5,
     x: 0,
-    y: 19,
+    y: 22,
     noResize: false
   },
   {
     id: "notes",
-    element: <Notes/>,
+    element: <Notes />,
     width: 4,
     height: 5,
     x: 4,
-    y: 19,
+    y: 22,
+    noResize: false
+  },
+  {
+    id: "recent-updates",
+    element: <RecentUpdates />,
+    width: 8,
+    height: 7,
+    x: 0,
+    y: 27,
+    noResize: false
+  },
+  {
+    id: "leave-summary",
+    element: <LeaveSummary />,
+    width: 4,
+    height: 7,
+    x: 8,
+    y: 27,
     noResize: false
   },
   {
     id: "post-box",
-    element: <PostBox/>,
+    element: <PostBox />,
     width: 6,
     height: 4,
     x: 0,
-    y: 29,
+    y: 34,
     noResize: false
   },
   {
     id: "post",
-    element: <Post/>,
+    element: <Post />,
     width: 6,
     height: 9,
     x: 6,
-    y: 29,
+    y: 34,
     noResize: false
   },
   {
     id: "birthday-tabs",
-    element: <BirthdayTabs/>,
+    element: <BirthdayTabs />,
     width: 6,
     height: 5,
     x: 0,
-    y: 33,
+    y: 38,
     noResize: false
   },
   {
     id: "horizontal-bar-chart",
-    element: <HorizontalBarChart/>,
+    element: <HorizontalBarChart />,
     width: 6,
-    height: 5,
-    x: 0,
-    y: 38,
-    noResize: false
-  },
-  {
-    id: "employee-calendar",
-    element: <EmployeeCalendar/>,
-    width: 6,
-    height: 9,
-    x: 6,
-    y: 38,
-    noResize: false
-  },
-  {
-    id: "custom-gauge-chart",
-    element: <CustomGaugeChart/>,
-    width: 4,
     height: 5,
     x: 0,
     y: 43,
     noResize: false
   },
   {
+    id: "employee-calendar",
+    element: <EmployeeCalendar />,
+    width: 6,
+    height: 9,
+    x: 6,
+    y: 43,
+    noResize: false
+  },
+  {
+    id: "custom-gauge-chart",
+    element: <CustomGaugeChart />,
+    width: 6,
+    height: 5,
+    x: 0,
+    y: 48,
+    noResize: false
+  },
+  {
     id: "smooth-curve-chart",
-    element: <SmoothCurveChart/>,
+    element: <SmoothCurveChart />,
     width: 6,
     height: 4,
     x: 6,
-    y: 47,
+    y: 52,
     noResize: false
-  },
+  }
 ];
+
 
 const Dashboard = ({ isSidebarCollapsed }) => {
   const gridRef = useRef(null);
@@ -234,26 +236,25 @@ const Dashboard = ({ isSidebarCollapsed }) => {
 
   useEffect(() => {
     try {
-      const savedLayout = localStorage.getItem('dashboardLayout');
+      const savedLayout = localStorage.getItem("dashboardLayout");
       if (savedLayout) {
         const parsedLayout = JSON.parse(savedLayout);
-        
+
         const layoutMap = {};
-        parsedLayout.forEach(item => {
+        parsedLayout.forEach((item) => {
           if (item.id) {
-            
             layoutMap[item.id] = {
               id: item.id,
               x: item.x,
               y: item.y,
-              width: item.w || item.width, 
-              height: item.h || item.height, 
-              noResize: item.noResize
+              width: item.w || item.width,
+              height: item.h || item.height,
+              noResize: item.noResize,
             };
           }
         });
 
-        const updatedElements = defaultElements.map(element => {
+        const updatedElements = defaultElements.map((element) => {
           const savedElement = layoutMap[element.id];
           if (savedElement) {
             return {
@@ -262,7 +263,7 @@ const Dashboard = ({ isSidebarCollapsed }) => {
               y: savedElement.y,
               width: savedElement.width,
               height: savedElement.height,
-              noResize: element.noResize 
+              noResize: element.noResize,
             };
           }
           return element;
@@ -293,43 +294,41 @@ const Dashboard = ({ isSidebarCollapsed }) => {
         minWidth: 350,
         maxWidth: 700,
         draggable: {
-          handle: '.grid-drag-handle'
+          handle: ".grid-drag-handle",
         },
         resizable: {
-          handles: 'e, se, s, sw, w',
+          handles: "e, se, s, sw, w",
         },
         float: true,
         animate: true,
         disableOneColumnMode: true,
-        staticGrid: false
+        staticGrid: false,
       });
 
       gridRef.current = grid;
 
       const saveLayout = () => {
-        
         const serializedLayout = grid.save(false, false);
-        localStorage.setItem('dashboardLayout', JSON.stringify(serializedLayout));
+        localStorage.setItem("dashboardLayout", JSON.stringify(serializedLayout));
       };
 
-      grid.on('change', saveLayout);
-      grid.on('dragstop', saveLayout);
-      grid.on('resizestop', saveLayout);
+      grid.on("change", saveLayout);
+      grid.on("dragstop", saveLayout);
+      grid.on("resizestop", saveLayout);
 
       setTimeout(() => {
-        
-        const gridItems = document.querySelectorAll('.grid-stack-item');
+        const gridItems = document.querySelectorAll(".grid-stack-item");
         gridItems.forEach((item) => {
-          const itemId = item.getAttribute('gs-id');
-          const element = elements.find(el => el.id === itemId);
+          const itemId = item.getAttribute("gs-id");
+          const element = elements.find((el) => el.id === itemId);
 
           if (element?.noResize) {
-            const resizeHandles = item.querySelectorAll('.ui-resizable-handle');
-            resizeHandles.forEach(handle => handle.remove());
-            item.classList.remove('ui-resizable');
+            const resizeHandles = item.querySelectorAll(".ui-resizable-handle");
+            resizeHandles.forEach((handle) => handle.remove());
+            item.classList.remove("ui-resizable");
 
             const nodeIndex = grid.engine.nodes.findIndex(
-              node => node.el && node.el.getAttribute('gs-id') === itemId
+              (node) => node.el && node.el.getAttribute("gs-id") === itemId
             );
 
             if (nodeIndex >= 0) {
@@ -339,14 +338,14 @@ const Dashboard = ({ isSidebarCollapsed }) => {
         });
 
         grid.batchUpdate();
-        elements.forEach(element => {
+        elements.forEach((element) => {
           const node = {
             id: element.id,
             x: element.x,
             y: element.y,
             w: element.width,
             h: element.height,
-            noResize: element.noResize
+            noResize: element.noResize,
           };
           grid.update(`[gs-id="${element.id}"]`, node);
         });
@@ -359,15 +358,14 @@ const Dashboard = ({ isSidebarCollapsed }) => {
     };
 
     if (elements.length > 0) {
-      
       setTimeout(initializeGrid, 50);
     }
 
     return () => {
       if (gridRef.current) {
-        gridRef.current.off('change');
-        gridRef.current.off('dragstop');
-        gridRef.current.off('resizestop');
+        gridRef.current.off("change");
+        gridRef.current.off("dragstop");
+        gridRef.current.off("resizestop");
         gridRef.current.destroy(false);
         gridInitialized.current = false;
       }
@@ -375,7 +373,7 @@ const Dashboard = ({ isSidebarCollapsed }) => {
   }, [elements]);
 
   const resetLayout = () => {
-    localStorage.removeItem('dashboardLayout');
+    localStorage.removeItem("dashboardLayout");
     setElements(defaultElements);
   };
 
@@ -403,7 +401,7 @@ const Dashboard = ({ isSidebarCollapsed }) => {
               gs-h={element.height}
               gs-x={element.x}
               gs-y={element.y}
-              gs-no-resize={element.noResize ? 'true' : undefined}
+              gs-no-resize={element.noResize ? "true" : undefined}
               data-gs-width={element.width}
               data-gs-height={element.height}
               data-gs-x={element.x}
@@ -411,9 +409,7 @@ const Dashboard = ({ isSidebarCollapsed }) => {
             >
               <div className="grid-stack-item-content grid-drag-handle cursor-move no-scrollbar">
                 <div className="grid-content no-scrollbar">
-                  <Suspense fallback={<div>Loading component...</div>}>
-                    {element.element}
-                  </Suspense>
+                  <Suspense fallback={<div>Loading component...</div>}>{element.element}</Suspense>
                 </div>
               </div>
             </div>
