@@ -73,6 +73,7 @@ const TeamStatus = () => {
       { id: 2, name: 'Ranjith', status: 'Working From Home' },
       { id: 3, name: 'Bala', status: 'Working From Home' },
       { id: 4, name: 'Raina', status: 'Working From Home' },
+      { id: 7, name: 'Virat', status: 'Working From Home' },
     ],
     onLeave: [
       { id: 5, name: 'John Doe', status: 'On Leave' },

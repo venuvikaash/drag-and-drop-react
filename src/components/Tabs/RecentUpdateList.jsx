@@ -23,14 +23,16 @@ const RecentUpdatesList = () => {
     { id: 2, title: 'Employee Policy 2024' },
     { id: 3, title: 'Employee Policy 2024' },
     { id: 4, title: 'Employee Policy 2024' },
+    { id: 5, title: 'Employee Policy 2024' },
+    { id: 6, title: 'Employee Policy 2024' },
   ];
 
   return (
     <Paper 
-      className="max-w-md mx-auto" 
+  
       elevation={0}
       sx={{ 
-        border: '1px dashed #d0c0f7', 
+        border: '1px #d0c0f7', 
         borderRadius: '8px',
         overflow: 'hidden'
       }}

@@ -14,7 +14,7 @@ const GroupedBarChart = ({ title = "Revenue Overview" }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
   return (
-    <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-sm">
+    <div className="w-full bg-white p-6 rounded-lg shadow-sm">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold text-gray-800">{title}</h2>
         <div className="flex items-center space-x-4">

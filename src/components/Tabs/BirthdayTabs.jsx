@@ -14,6 +14,14 @@ const birthdaysToday = [
         name: 'Malton Durai',
         img: 'https://i.pravatar.cc/150?img=1',
     },
+    {
+        name: 'Malton Durai',
+        img: 'https://i.pravatar.cc/150?img=1',
+    },
+    {
+        name: 'Malton Durai',
+        img: 'https://i.pravatar.cc/150?img=1',
+    },
 ];
 
 const upcomingBirthdays = [

@@ -26,7 +26,7 @@ const CustomGaugeChart = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-md w-full max-w-md">
+    <div className="bg-white rounded-lg p-6 shadow-md w-full">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-medium">Employee by Department</h2>
         

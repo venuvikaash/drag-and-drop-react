@@ -13,7 +13,7 @@ import { Bolt, CalendarToday, ChevronRight } from '@mui/icons-material';
 
 const RecentUpdates = () => {
   return (
-    <Paper className="p-6 rounded-lg shadow-sm max-w-3xl">
+    <Paper className="p-6 rounded-lg shadow-sm">
       {/* Header Section */}
       <Box className="flex justify-between items-center mb-6">
         <Box className="flex items-center">

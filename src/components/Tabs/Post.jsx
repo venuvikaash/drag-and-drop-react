@@ -31,13 +31,23 @@ const Post = () => {
                     <ul className="font-semibold text-[11px] text-[#5F5F5F] mt-1 list-disc list-inside">
                         <li>Food Reimbursement</li>
                         <li>Mobile/Internet Allowance</li>
+                        <li>Mobile/Internet Allowance</li>
+                        <li>Mobile/Internet Allowance</li>
                         <li>Transportation Allowance</li>
+                        <li>Professional Development</li>
+                        <li>Professional Development</li>
                         <li>Professional Development</li>
                     </ul>
 
                     <span className="text-[12px] font-semibold mt-3">How It Works:</span>
                     <ul className="font-semibold text-[11px] text-[#5F5F5F] mt-1 list-disc list-inside">
                         <li>Declare Your Expenses: Report your annual expenses for the above components on KEKA.</li>
+                        <li>Declare Your Expenses: Report your annual expenses for the above components on KEKA.</li>
+                        <li>Declare Your Expenses: Report your annual expenses for the above components on KEKA.</li>
+                        <li>Declare Your Expenses: Report your annual expenses for the above components on KEKA.</li>
+                        <li>Declare Your Expenses: Report your annual expenses for the above components on KEKA.</li>
+                        <li>Save Your Invoices: Keep all invoices for expenses related to these new benefits.</li>
+                        <li>Save Your Invoices: Keep all invoices for expenses related to these new benefits.</li>
                         <li>Save Your Invoices: Keep all invoices for expenses related to these new benefits.</li>
                     </ul>
                 </div>

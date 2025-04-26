@@ -21,7 +21,7 @@ const CustomPieChart = () => {
   }
 
   return (
-    <div className="w-full max-w-lg bg-white p-6 rounded-lg shadow-sm">
+    <div className="w-full bg-white p-6 rounded-lg shadow-sm">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold text-gray-800">Employees by Department</h2>
       </div>

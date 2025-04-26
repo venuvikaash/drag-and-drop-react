@@ -7,10 +7,12 @@ const Holidays = () => {
     { id: 3, date: '02 June 2026', name: 'Ramadan' },
     { id: 4, date: '07 July 2026', name: 'Kite Festival' },
     { id: 5, date: '07 August 2026', name: 'Sankranti' },
+    { id: 6, date: '07 August 2026', name: 'Sankranti' },
+    { id: 7, date: '07 August 2026', name: 'Sankranti' },
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 w-full max-w-md">
+    <div className="bg-white rounded-lg shadow p-4 w-full">
       <div className="flex items-center mb-6">
         <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center mr-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-500">

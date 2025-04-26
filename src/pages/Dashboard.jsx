@@ -24,6 +24,7 @@ const GroupedBarChart = lazy(() => import("../components/Charts/GroupedBarChart"
 const HorizontalBarChart = lazy(() => import("../components/Charts/HorizontalBarChart"));
 const CustomGaugeChart = lazy(() => import("../components/Charts/CustomGaugeChart"));
 const EmployeeCalendar = lazy(() => import("../components/Tabs/EmployeeCalendar"));
+const SmoothCurveChart = lazy(() => import("../components/Charts/SmoothCurveChart"));
 
 const defaultElements = [
   {
@@ -87,7 +88,7 @@ const defaultElements = [
     height: 5,
     x: 0,
     y: 9,
-    noResize: true
+    noResize: false
   },
   {
     id: "performance-chart",
@@ -96,34 +97,7 @@ const defaultElements = [
     height: 5,
     x: 6,
     y: 9,
-    noResize: true
-  },
-  {
-    id: "leave-summary",
-    element: <LeaveSummary/>,
-    width: 6,
-    height: 7,
-    x: 0,
-    y: 14,
-    noResize: true
-  },
-  {
-    id: "recent-updates",
-    element: <RecentUpdates/>,
-    width: 6,
-    height: 7,
-    x: 6,
-    y: 14,
-    noResize: true
-  },
-  {
-    id: "recent-update-list",
-    element: <RecentUpdateList/>,
-    width: 4,
-    height: 5,
-    x: 0,
-    y: 21,
-    noResize: true
+    noResize: false
   },
   {
     id: "team-status",
@@ -131,35 +105,62 @@ const defaultElements = [
     width: 4,
     height: 5,
     x: 4,
-    y: 21,
-    noResize: true
+    y: 14,
+    noResize: false
   },
   {
     id: "schedule",
     element: <Schedule/>,
     width: 4,
-    height: 8,
+    height: 10,
     x: 9,
+    y: 14,
+    noResize: false
+  },
+  {
+    id: "leave-summary",
+    element: <LeaveSummary/>,
+    width: 4,
+    height: 5,
+    x: 9,
+    y: 24,
+    noResize: false
+  },
+  {
+    id: "recent-update-list",
+    element: <RecentUpdateList/>,
+    width: 4,
+    height: 5,
+    x: 0,
+    y: 14,
+    noResize: false
+  },
+  {
+    id: "recent-updates",
+    element: <RecentUpdates/>,
+    width: 8,
+    height: 5,
+    x: 0,
     y: 21,
-    noResize: true
+    noResize: false
   },
   {
     id: "holidays",
     element: <Holidays/>,
     width: 4,
-    height: 4,
+    height: 5,
     x: 0,
-    y: 26,
-    noResize: true
+    y: 19,
+    noResize: false
   },
   {
     id: "notes",
     element: <Notes/>,
     width: 4,
-    height: 4,
+    height: 5,
     x: 4,
-    y: 26,
-    noResize: true
+    y: 19,
+    noResize: false
   },
   {
     id: "post-box",
@@ -167,17 +168,17 @@ const defaultElements = [
     width: 6,
     height: 4,
     x: 0,
-    y: 30,
-    noResize: true
+    y: 29,
+    noResize: false
   },
   {
     id: "post",
     element: <Post/>,
     width: 6,
-    height: 10,
+    height: 9,
     x: 6,
-    y: 30,
-    noResize: true
+    y: 29,
+    noResize: false
   },
   {
     id: "birthday-tabs",
@@ -185,8 +186,8 @@ const defaultElements = [
     width: 6,
     height: 5,
     x: 0,
-    y: 34,
-    noResize: true
+    y: 33,
+    noResize: false
   },
   {
     id: "horizontal-bar-chart",
@@ -194,26 +195,35 @@ const defaultElements = [
     width: 6,
     height: 5,
     x: 0,
-    y: 39,
-    noResize: true
+    y: 38,
+    noResize: false
   },
   {
     id: "employee-calendar",
     element: <EmployeeCalendar/>,
     width: 6,
-    height: 5,
+    height: 9,
     x: 6,
-    y: 39,
-    noResize: true
+    y: 38,
+    noResize: false
   },
   {
     id: "custom-gauge-chart",
     element: <CustomGaugeChart/>,
-    width: 6,
+    width: 4,
     height: 5,
     x: 0,
-    y: 44,
-    noResize: true
+    y: 43,
+    noResize: false
+  },
+  {
+    id: "smooth-curve-chart",
+    element: <SmoothCurveChart/>,
+    width: 6,
+    height: 4,
+    x: 6,
+    y: 47,
+    noResize: false
   },
 ];
 

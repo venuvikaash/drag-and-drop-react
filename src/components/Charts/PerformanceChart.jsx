@@ -43,9 +43,9 @@ const PerformanceChart = () => {
   };
 
   return (
-    <div className="w-full border-t border-gray-200 pt-6 bg-white">
-      <div className="flex justify-between items-center mb-10">
-        <h2 className="text-lg font-medium text-gray-800">My Performance</h2>
+    <div className="bg-white rounded-lg shadow-sm p-6 h-[500px] flex flex-col">
+      <div className="flex justify-between items-center mb-15">
+        <h2 className="text-xl font-bold text-gray-800">My Performance</h2>
         <div className="relative">
           <button
             className="flex items-center border border-gray-300 rounded px-3 py-1 text-sm"
