@@ -7,7 +7,7 @@ const PostBox = () => {
     const [isPoll, setIsPoll] = useState(false);
 
     return (
-        <div className="w-full h-full p-4 border-[1px] border-[#DFDFDF] bg-white rounded-xl overflow-auto">
+        <div className="w-full !h-[302px] p-4 border-[1px] border-[#DFDFDF] bg-white rounded-xl overflow-hidden">
             <div className="flex items-center justify-between pb-[3%]">
                 <div className="flex items-center gap-2 ">
                     <img
@@ -33,7 +33,7 @@ const PostBox = () => {
                 className="w-full h-[140px] resize-none rounded-lg border border-[#DFDFDF] bg-[#EEEEEE] p-3 text-sm outline-none"
             ></textarea>
 
-            <div className="flex justify-between items-center mt-4">
+            <div className="flex justify-between items-center mt-1">
                 <div className="flex gap-2">
                     <button className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm text-[#1B4E4D] bg-[#F3F3F3]">
                         <BrokenImageOutlinedIcon fontSize="small" />
@@ -45,7 +45,7 @@ const PostBox = () => {
                     </button>
                 </div>
             </div>
-            <div className="flex justify-end items-center mt-4">
+            <div className="flex justify-end items-center mt-1">
                 <div className="flex gap-2">
                     <button className="px-4 py-1.5 border border-[#004d40] text-[#004d40] rounded-md text-sm bg-white">
                         Save Draft

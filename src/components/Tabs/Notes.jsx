@@ -8,7 +8,7 @@ const Notes = () => {
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 w-full max-w-md border border-dashed border-blue-200">
+    <div className="bg-white rounded-lg shadow p-4 w-full border border-dashed border-blue-200 !h-[550px] overflow-hidden">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
           <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center mr-2">

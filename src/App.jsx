@@ -81,7 +81,7 @@ function App() {
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          backgroundColor: "#D3D3D3", 
+          backgroundColor: "#F8FCFF", 
         }}
       >
         <Box

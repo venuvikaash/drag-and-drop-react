@@ -13,7 +13,7 @@ import { EventNote } from '@mui/icons-material';
 // Component for each circular progress leave card
 const LeaveCard = ({ days, type, color = '#2D5E5E' }) => {
   return (
-    <Box className="flex flex-col items-center p-2">
+    <Box className="flex flex-col items-center p-2 overflow-hidden">
       <Box position="relative" display="inline-flex" className="mb-1">
         <CircularProgress
           variant="determinate"
@@ -51,7 +51,7 @@ const LeaveCard = ({ days, type, color = '#2D5E5E' }) => {
 // Main Leave Summary Component
 const LeaveSummary = () => {
   return (
-    <Paper className="p-6 rounded-lg shadow-md max-w-xl mx-auto">
+    <Paper className="p-6 rounded-lg shadow-md max-w-xl mx-auto !h-[560px]">
       <Box className="flex justify-between items-center mb-6">
         <Box className="flex items-center">
           <Box className="bg-teal-50 p-2 rounded-lg mr-3">

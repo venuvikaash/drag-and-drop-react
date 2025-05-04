@@ -13,9 +13,14 @@ const Schedule = () => {
   const meetings = [
     { id: 1, title: 'Meeting with Clients', time: '9:30 - 10:30 AM', date: new Date(), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
     { id: 2, title: 'Book Discussion', time: '12:00 - 12:50 AM', date: new Date(), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
-    { id: 3, title: 'Brief for reference, color, style', time: '3:20 - 4:30 PM', date: new Date(), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
-    { id: 4, title: 'Brief for reference, color, style', time: '9:30 - 10:30 AM', date: new Date(), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
-    { id: 5, title: 'Brief for reference, color, style', time: '9:30 - 10:30 AM', date: addDays(new Date(), 1), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
+    { id: 3, title: 'Brief for reference1, color, style', time: '3:20 - 4:30 PM', date: new Date(), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
+    { id: 4, title: 'Brief for reference2, color, style', time: '9:30 - 10:30 AM', date: new Date(), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
+    { id: 4, title: 'Brief for reference2, color, style', time: '9:30 - 10:30 AM', date: new Date(), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
+    { id: 4, title: 'Brief for reference2, color, style', time: '9:30 - 10:30 AM', date: new Date(), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
+    { id: 4, title: 'Brief for reference2, color, style', time: '9:30 - 10:30 AM', date: new Date(), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
+    { id: 4, title: 'Brief for reference2, color, style', time: '9:30 - 10:30 AM', date: new Date(), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
+    { id: 5, title: 'Brief for reference3, color, style', time: '9:30 - 10:30 AM', date: addDays(new Date(), 4), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
+    { id: 6, title: 'Brief for reference4, color, style', time: '10:30 - 11:30 AM', date: addDays(new Date(), 2), location: '349 Irvine, CA', participants: ['/api/placeholder/30/30', '/api/placeholder/30/30'] },
   ];
 
   const tasks = [
@@ -157,7 +162,7 @@ const Schedule = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 w-full max-w-md">
+    <div className="bg-white rounded-lg shadow p-4 w-full">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-medium" id="schedule-heading">Schedule</h3>
         <button 

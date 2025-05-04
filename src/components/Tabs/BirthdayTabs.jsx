@@ -14,6 +14,14 @@ const birthdaysToday = [
         name: 'Malton Durai',
         img: 'https://i.pravatar.cc/150?img=1',
     },
+    {
+        name: 'Malton Durai',
+        img: 'https://i.pravatar.cc/150?img=1',
+    },
+    {
+        name: 'Malton Durai',
+        img: 'https://i.pravatar.cc/150?img=1',
+    },
 ];
 
 const upcomingBirthdays = [
@@ -31,7 +39,7 @@ const BirthdayTabs = () => {
     const [tabIndex, setTabIndex] = useState(0);
 
     return (
-        <Box className="w-full h-full p-4 border-[1px] border-[#DFDFDF] bg-white rounded-xl overflow-auto">
+        <Box className="w-full !h-[75vh] p-4 border-[1px] border-[#DFDFDF] bg-white rounded-xl overflow-auto">
             <Tabs
                 value={tabIndex}
                 onChange={(e, val) => setTabIndex(val)}

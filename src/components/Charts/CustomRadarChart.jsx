@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 import { ChevronDown } from 'lucide-react';
 
-const RevenueOverviewRadarChart = () => {
+const CustomRadarChart = () => {
   const chartContainerRef = useRef(null);
   const [containerHeight, setContainerHeight] = useState(0);
   
@@ -96,7 +96,7 @@ const RevenueOverviewRadarChart = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 h-[500px] flex flex-col" ref={chartContainerRef}>
+    <div className="bg-white rounded-lg shadow-sm p-6 !h-[530px] flex flex-col overflow-hidden" ref={chartContainerRef}>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold text-gray-800">Revenue Overview</h2>
         <button className="flex items-center text-gray-600 border rounded-md px-3 py-1 hover:bg-gray-50 transition-colors">
@@ -186,4 +186,4 @@ const RevenueOverviewRadarChart = () => {
   );
 };
 
-export default RevenueOverviewRadarChart;
+export default CustomRadarChart;

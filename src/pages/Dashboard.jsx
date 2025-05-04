@@ -1,254 +1,422 @@
-import React, { useEffect, useRef, lazy } from "react";
+import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { GridStack } from "gridstack";
 import "gridstack/dist/gridstack.min.css";
 // import PostBox from "../components/Charts/PostBox";
 // import Post from "../components/Charts/Post";
 // import BirthdayTabs from "../components/Charts/BirthdayTabs";
 
-const RevenueOverviewRadarChart = lazy(() =>
-  import("../components/Charts/RevenueOverviewRadarChart")
-);
-const RevenueOverviewChart = lazy(() => import("../components/Charts/RevenueOverviewChart"));
-const WelcomeCard = lazy(() => import("../components/Charts/WelcomeCard"));
-const RecentUpdates = lazy(() => import("../components/Charts/RecentUpdates"));
-const RecentUpdateList = lazy(() => import("../components/Charts/RecentUpdateList"));
-const LeaveSummary = lazy(() => import("../components/Charts/LeaveSummary"));
-const TeamStatus = lazy(() => import("../components/Charts/TeamsStatus"));
-const Schedule = lazy(() => import("../components/Charts/Schedule"));
-const Notes = lazy(() => import("../components/Charts/Notes"));
-const Holidays = lazy(() => import("../components/Charts/Holiday"));
-const BirthdayTabs = lazy(() => import("../components/Charts/BirthdayTabs"));
-const Post = lazy(() => import("../components/Charts/Post"));
-const PostBox = lazy(() => import("../components/Charts/PostBox"));
-const StackedRevenueOverview = lazy(() => import("../components/Charts/StackedRevenueOverview"))
-const DepartmentHeadcountChart = lazy(() => import("../components/Charts/DepartmentHeadCountChart"))
-const StatusRevenueChart = lazy(() => import("../components/Charts/StatusRevenueChart"))
+const CustomRadarChart = lazy(() => import("../components/Charts/CustomRadarChart"));
+const CustomLineChart = lazy(() => import("../components/Charts/CustomLineChart"));
+const WelcomeCard = lazy(() => import("../components/WelcomeCard/WelcomeCard"));
+const RecentUpdates = lazy(() => import("../components/Tabs/RecentUpdates"));
+const RecentUpdateList = lazy(() => import("../components/Tabs/RecentUpdateList"));
+const LeaveSummary = lazy(() => import("../components/Tabs/LeaveSummary"));
+const TeamStatus = lazy(() => import("../components/Tabs/TeamsStatus"));
+const Schedule = lazy(() => import("../components/Tabs/Schedule"));
+const Notes = lazy(() => import("../components/Tabs/Notes"));
+const Holidays = lazy(() => import("../components/Tabs/Holiday"));
+const BirthdayTabs = lazy(() => import("../components/Tabs/BirthdayTabs"));
+const Post = lazy(() => import("../components/Tabs/Post"));
+const PostBox = lazy(() => import("../components/Tabs/PostBox"));
+const LinearChart = lazy(() => import("../components/Charts/LinearChart"));
+const PerformanceChart = lazy(() => import("../components/Charts/PerformanceChart"));
+const SingleBarChart = lazy(() => import("../components/Charts/SingleBarChart"));
+const PieChart = lazy(() => import("../components/Charts/PieChart"));
+const WaveChart = lazy(() => import("../components/Charts/WaveChart"));
+const GroupedBarChart = lazy(() => import("../components/Charts/GroupedBarChart"));
+const HorizontalBarChart = lazy(() => import("../components/Charts/HorizontalBarChart"));
+const CustomGaugeChart = lazy(() => import("../components/Charts/CustomGaugeChart"));
+const EmployeeCalendar = lazy(() => import("../components/Tabs/EmployeeCalendar"));
+const SmoothCurveChart = lazy(() => import("../components/Charts/SmoothCurveChart"));
 
 
-const InternalElements = [
+const defaultElements = [
   {
-    element: <RevenueOverviewChart/>,
-    width: 6,
-    height: 5,
+    id: "custom-line-chart",
+    element: <CustomLineChart />,
+    width: 4,
+    height: 7,
     x: 0,
     y: 0,
     noResize: false
   },
   {
-    element: <RevenueOverviewRadarChart/>,
+    id: "pie-chart",
+    element: <PieChart />,
     width: 4,
-    height: 5,
-    x: 6,
+    height: 7,
+    x: 4,
     y: 0,
     noResize: false
   },
   {
-    element: <RevenueOverviewChart/>,
-    width: 6,
-    height: 5,
-    x: 0,
-    y: 5,
+    id: "custom-radar-chart",
+    element: <CustomRadarChart />,
+    width: 4,
+    height: 7,
+    x: 8,
+    y: 0,
     noResize: false
   },
   {
-    element: <RevenueOverviewRadarChart/>,
-    width: 6,
-    height: 5,
-    x: 6,
-    y: 5,
-    noResize: false
-  },
-  {
-    element: <LeaveSummary/>,
-    width: 6,
-    height: 7,
-    x: 0,
-    y: 10,
-    noResize: true
-  },
-  {
-    element: <RecentUpdates/>,
-    width: 6,
-    height: 7,
-    x: 6,
-    y: 10,
-    noResize: true
-  },
-  {
-    element: <RecentUpdateList/>,
+    id: "wave-chart",
+    element: <WaveChart />,
     width: 4,
     height: 5,
+    x: 0,
+    y: 7,
+    noResize: false
+  },
+  {
+    id: "single-bar-chart",
+    element: <SingleBarChart />,
+    width: 4,
+    height: 5,
+    x: 4,
+    y: 7,
+    noResize: false
+  },
+  {
+    id: "grouped-bar-chart",
+    element: <GroupedBarChart />,
+    width: 4,
+    height: 5,
+    x: 8,
+    y: 7,
+    noResize: false
+  },
+  {
+    id: "linear-chart",
+    element: <LinearChart />,
+    width: 6,
+    height: 5,
+    x: 0,
+    y: 12,
+    noResize: false
+  },
+  {
+    id: "performance-chart",
+    element: <PerformanceChart />,
+    width: 6,
+    height: 5,
+    x: 6,
+    y: 12,
+    noResize: false
+  },
+  {
+    id: "recent-update-list",
+    element: <RecentUpdateList />,
+    width: 4,
+    height: 6,
     x: 0,
     y: 17,
-    noResize: true
-  },  
+    noResize: false
+  },
   {
-    element: <TeamStatus/>,
+    id: "team-status",
+    element: <TeamStatus />,
     width: 4,
     height: 5,
     x: 4,
     y: 17,
-    noResize: true
+    noResize: false
   },
   {
-    element: <Schedule/>,
+    id: "schedule",
+    element: <Schedule />,
     width: 4,
     height: 10,
     x: 8,
     y: 17,
-    noResize: true
-  },  
+    noResize: false
+  },
   {
-    element: <Holidays/>,
+    id: "holidays",
+    element: <Holidays />,
     width: 4,
-    height: 8,
+    height: 5,
     x: 0,
     y: 22,
-    noResize: true
-  },  
+    noResize: false
+  },
   {
-    element: <Notes/>,
+    id: "notes",
+    element: <Notes />,
     width: 4,
-    height: 8,
+    height: 5,
     x: 4,
     y: 22,
-    noResize: true
-  },  
+    noResize: false
+  },
   {
-    element: <Post/>,
+    id: "recent-updates",
+    element: <RecentUpdates />,
+    width: 8,
+    height: 7,
+    x: 0,
+    y: 27,
+    noResize: false
+  },
+  {
+    id: "leave-summary",
+    element: <LeaveSummary />,
+    width: 4,
+    height: 7,
+    x: 8,
+    y: 27,
+    noResize: false
+  },
+  {
+    id: "post-box",
+    element: <PostBox />,
+    width: 6,
+    height: 4,
+    x: 0,
+    y: 34,
+    noResize: false
+  },
+  {
+    id: "post",
+    element: <Post />,
     width: 6,
     height: 10,
     x: 6,
-    y: 30,
-    noResize: true
-  },  
-  {
-    element: <PostBox/>,
-    width: 6,
-    height: 5,
-    x: 0,
-    y: 30,
-    noResize: true
-  },  
-  {
-    element: <BirthdayTabs/>,
-    width: 6,
-    height: 5,
-    x: 0,
-    y: 35,
-    noResize: true
-  },  
- 
-  {
-    element: <StackedRevenueOverview />,
-    width: 6,
-    height:5,
-    x: 0,
-    y: 35,
-    noResize: true
-  },
-
-  {
-    element: <DepartmentHeadcountChart />,
-    width: 6,
-    height:5,
-    x: 0,
-    y: 35,
+    y: 34,
     noResize: false
   },
   {
-    element: <StatusRevenueChart />,
-    width: 5,
-    height: 10,
-    x: 7,
-    y: 17,
+    id: "birthday-tabs",
+    element: <BirthdayTabs />,
+    width: 6,
+    height: 5,
+    x: 0,
+    y: 38,
     noResize: false
-  }, 
+  },
+  {
+    id: "horizontal-bar-chart",
+    element: <HorizontalBarChart />,
+    width: 6,
+    height: 5,
+    x: 0,
+    y: 43,
+    noResize: false
+  },
+  {
+    id: "employee-calendar",
+    element: <EmployeeCalendar />,
+    width: 6,
+    height: 9,
+    x: 6,
+    y: 43,
+    noResize: false
+  },
+  {
+    id: "custom-gauge-chart",
+    element: <CustomGaugeChart />,
+    width: 6,
+    height: 5,
+    x: 0,
+    y: 48,
+    noResize: false
+  },
+  {
+    id: "smooth-curve-chart",
+    element: <SmoothCurveChart />,
+    width: 6,
+    height: 4,
+    x: 6,
+    y: 52,
+    noResize: false
+  }
 ];
+
 
 const Dashboard = ({ isSidebarCollapsed }) => {
   const gridRef = useRef(null);
+  const [elements, setElements] = useState([]);
+  const gridInitialized = useRef(false);
 
   useEffect(() => {
-    if (gridRef.current) {
-      gridRef.current.destroy(false);
-    }
-    
-    gridRef.current = GridStack.init({
-      column: 12,
-      minRow: 1,
-      cellHeight: 80,
-      minWidth: 350,
-      maxWidth: 700,
-      draggable: {
-        handle: '.grid-drag-handle'
-      },
-      resizable: {
-        handles: 'e, se, s, sw, w',
-      },
-      float: true,
-      animate: true,
-      disableOneColumnMode: true
-    });
+    try {
+      const savedLayout = localStorage.getItem("dashboardLayout");
+      if (savedLayout) {
+        const parsedLayout = JSON.parse(savedLayout);
 
-    gridRef.current.on('resizestart', function(event, el) {
-      const index = parseInt(el.getAttribute('data-index'), 10);
-      if (InternalElements[index]?.noResize) {
-        return false;
-      }
-    });
-
-    setTimeout(() => {
-      const gridItems = document.querySelectorAll('.grid-stack-item');
-      gridItems.forEach((item, index) => {
-        if (InternalElements[index]?.noResize) {
-          const resizeHandles = item.querySelectorAll('.ui-resizable-handle');
-          resizeHandles.forEach(handle => handle.remove());
-          item.classList.remove('ui-resizable');
-          if (gridRef.current.engine.nodes[index]) {
-            gridRef.current.engine.nodes[index].noResize = true;
+        const layoutMap = {};
+        parsedLayout.forEach((item) => {
+          if (item.id) {
+            layoutMap[item.id] = {
+              id: item.id,
+              x: item.x,
+              y: item.y,
+              width: item.w || item.width,
+              height: item.h || item.height,
+              noResize: item.noResize,
+            };
           }
-        }
-      });
-    }, 100);
+        });
 
-    return () => {
+        const updatedElements = defaultElements.map((element) => {
+          const savedElement = layoutMap[element.id];
+          if (savedElement) {
+            return {
+              ...element,
+              x: savedElement.x,
+              y: savedElement.y,
+              width: savedElement.width,
+              height: savedElement.height,
+              noResize: element.noResize,
+            };
+          }
+          return element;
+        });
+
+        setElements(updatedElements);
+      } else {
+        setElements(defaultElements);
+      }
+    } catch (error) {
+      console.error("Error loading saved layout:", error);
+      setElements(defaultElements);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!elements.length) return;
+
+    const initializeGrid = () => {
       if (gridRef.current) {
         gridRef.current.destroy(false);
       }
+
+      const grid = GridStack.init({
+        column: 12,
+        minRow: 1,
+        cellHeight: 80,
+        minWidth: 350,
+        maxWidth: 700,
+        draggable: {
+          handle: ".grid-drag-handle",
+        },
+        resizable: {
+          handles: "e, se, s, sw, w",
+        },
+        float: true,
+        animate: true,
+        disableOneColumnMode: true,
+        staticGrid: false,
+      });
+
+      gridRef.current = grid;
+
+      const saveLayout = () => {
+        const serializedLayout = grid.save(false, false);
+        localStorage.setItem("dashboardLayout", JSON.stringify(serializedLayout));
+      };
+
+      grid.on("change", saveLayout);
+      grid.on("dragstop", saveLayout);
+      grid.on("resizestop", saveLayout);
+
+      setTimeout(() => {
+        const gridItems = document.querySelectorAll(".grid-stack-item");
+        gridItems.forEach((item) => {
+          const itemId = item.getAttribute("gs-id");
+          const element = elements.find((el) => el.id === itemId);
+
+          if (element?.noResize) {
+            const resizeHandles = item.querySelectorAll(".ui-resizable-handle");
+            resizeHandles.forEach((handle) => handle.remove());
+            item.classList.remove("ui-resizable");
+
+            const nodeIndex = grid.engine.nodes.findIndex(
+              (node) => node.el && node.el.getAttribute("gs-id") === itemId
+            );
+
+            if (nodeIndex >= 0) {
+              grid.engine.nodes[nodeIndex].noResize = true;
+            }
+          }
+        });
+
+        grid.batchUpdate();
+        elements.forEach((element) => {
+          const node = {
+            id: element.id,
+            x: element.x,
+            y: element.y,
+            w: element.width,
+            h: element.height,
+            noResize: element.noResize,
+          };
+          grid.update(`[gs-id="${element.id}"]`, node);
+        });
+        grid.commit();
+
+        saveLayout();
+      }, 200);
+
+      gridInitialized.current = true;
     };
-  }, []);
+
+    if (elements.length > 0) {
+      setTimeout(initializeGrid, 50);
+    }
+
+    return () => {
+      if (gridRef.current) {
+        gridRef.current.off("change");
+        gridRef.current.off("dragstop");
+        gridRef.current.off("resizestop");
+        gridRef.current.destroy(false);
+        gridInitialized.current = false;
+      }
+    };
+  }, [elements]);
+
+  const resetLayout = () => {
+    localStorage.removeItem("dashboardLayout");
+    setElements(defaultElements);
+  };
 
   return (
     <div className="h-full w-full flex flex-col">
       <div className="pl-4 pr-4 h-[175px] flex-shrink-0">
-        <WelcomeCard isSidebarCollapsed={isSidebarCollapsed} />
+        <Suspense fallback={<div>Loading welcome card...</div>}>
+          <WelcomeCard isSidebarCollapsed={isSidebarCollapsed} />
+        </Suspense>
+        <button
+          onClick={resetLayout}
+          className="absolute top-4 right-4 px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded"
+        >
+          Reset Layout
+        </button>
       </div>
       <div className="flex-grow p-4 w-full">
         <div className="grid-stack h-full">
-          {
-            InternalElements.map((element, index) => {
-              return (
-                <div
-                  key={index}
-                  data-index={index}
-                  className="grid-stack-item" 
-                  gs-w={element.width}
-                  gs-h={element.height}
-                  gs-x={element.x}
-                  gs-y={element.y}
-                  gs-no-resize={element.noResize ? 'true' : undefined}
-                  gs-id={`grid-item-${index}`}
-                >
-                  <div className="grid-stack-item-content grid-drag-handle cursor-move">
-                    <div className="grid-content">
-                      {element.element}
-                    </div>
-                  </div>
+          {elements.map((element) => (
+            <div
+              key={element.id}
+              className="grid-stack-item"
+              gs-id={element.id}
+              gs-w={element.width}
+              gs-h={element.height}
+              gs-x={element.x}
+              gs-y={element.y}
+              gs-no-resize={element.noResize ? "true" : undefined}
+              data-gs-width={element.width}
+              data-gs-height={element.height}
+              data-gs-x={element.x}
+              data-gs-y={element.y}
+            >
+              <div className="grid-stack-item-content grid-drag-handle cursor-move no-scrollbar">
+                <div className="grid-content no-scrollbar">
+                  <Suspense fallback={<div>Loading component...</div>}>{element.element}</Suspense>
                 </div>
-              );
-            })
-          }
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
