@@ -18,7 +18,7 @@
     "@mui/x-charts": "^8.1.0",
     "@tailwindcss/vite": "^4.0.16",
     "@xyflow/react": "^12.4.4",
-    "chart.js": "^4.4.8",
+    "chart.js": "^4.4.9",
     "date-fns": "^4.1.0",
     "gridstack": "^11.5.1",
     "lucide-react": "^0.484.0",
