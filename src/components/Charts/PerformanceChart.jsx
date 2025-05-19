@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
 import { ChevronDown } from "lucide-react";
 
 const PerformanceChart = () => {
@@ -86,60 +93,60 @@ const PerformanceChart = () => {
           )}
         </div>
       </div>
-      
+
       <div className="h-56">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart 
-            data={data} 
+          <BarChart
+            data={data}
             margin={{ top: 20, right: 10, bottom: 10, left: 10 }}
             barCategoryGap={10}
           >
-            <CartesianGrid 
-              horizontal={true} 
-              vertical={false} 
-              stroke="#e5e5e5" 
+            <CartesianGrid
+              horizontal={true}
+              vertical={false}
+              stroke="#e5e5e5"
               strokeDasharray="3 3"
             />
-            <XAxis 
-              dataKey="year" 
-              axisLine={false} 
-              tickLine={false} 
-              tick={{ fontSize: 12, fill: '#666' }}
+            <XAxis
+              dataKey="year"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 12, fill: "#666" }}
               dy={10}
             />
-            <YAxis 
-              axisLine={false} 
-              tickLine={false} 
+            <YAxis
+              axisLine={false}
+              tickLine={false}
               tick={false}
               domain={[0, 18]}
             />
-            <Bar 
-              dataKey="value" 
-              fill="#1B4D3E" 
-              radius={[2, 2, 0, 0]} 
+            <Bar
+              dataKey="value"
+              fill="#1B4D3E"
+              radius={[2, 2, 0, 0]}
               barSize={60}
-              label={{ 
-                position: 'top', 
-                fill: '#333',
+              label={{
+                position: "top",
+                fill: "#333",
                 fontSize: 11,
-                formatter: (value) => value
+                formatter: (value) => value,
               }}
             />
           </BarChart>
         </ResponsiveContainer>
       </div>
-      
+
       {/* Current year highlight */}
       <div className="flex justify-between px-10 pt-2">
         {data.map((item) => (
-          <div 
-            key={item.year} 
-            className={`text-center mx-1 ${item.year === "2025" ? "bg-yellow-200 px-4 py-1 rounded" : ""}`}
-            style={{ width: `${100/data.length}%`, maxWidth: 60 }}
+          <div
+            key={item.year}
+            className={`text-center mx-1 ${
+              item.year === "2025" ? "bg-yellow-200 px-4 py-1 rounded" : ""
+            }`}
+            style={{ width: `${100 / data.length}%`, maxWidth: 60 }}
           >
-            {item.year === "2025" && (
-              <span>{item.year}</span>
-            )}
+            {item.year === "2025" && <span>{item.year}</span>}
           </div>
         ))}
       </div>
